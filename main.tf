@@ -1,6 +1,7 @@
 locals {
   days = {
     1 : false,
-    2 : true,
+    2 : false,
+    3 : true,
   }
 }

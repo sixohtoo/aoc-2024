@@ -3,11 +3,13 @@ variable "filename" {
 }
 
 variable "sep" {
-  type = list(string)
+  type    = list(string)
+  default = []
 }
 
 variable "tonum" {
-  type = number
+  type    = number
+  default = null
 }
 
 locals {
@@ -24,6 +26,10 @@ locals {
       for v in split(var.sep[1], line) : var.tonum == 2 ? format("%05d", v) : v
     ]
   ] : null
+}
+
+output "none" {
+  value = local.input
 }
 
 output "first" {
