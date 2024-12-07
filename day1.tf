@@ -1,5 +1,5 @@
 locals {
-  d1_input = local.days[1] ? split("\n", file("./day1.d1_input")) : []
+  d1_input = local.days[1] ? split("\n", file("./inputs/day1.input")) : []
 
   d1_l1_s = sort([
     for line in local.d1_input : format("%05d", trimspace(regexall("\\d+ ", line)[0]))
