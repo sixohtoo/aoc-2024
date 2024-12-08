@@ -1,5 +1,5 @@
 locals {
-  d4_input_right = module.d4_parse_input.first
+  d4_input_right = local.days[4] ? module.d4_parse_input.first : ["AAA", "AAA", "AAA"]
   d4_input_split = tolist([
     for line in local.d4_input_right : split("", line)
   ])
@@ -148,9 +148,9 @@ module "d4_parse_input" {
 }
 
 output "day4-a" {
-  value = sum(local.d4_count)
+  value = local.days[4] ? sum(local.d4_count) : null
 }
 
 output "day4-b" {
-  value = length(local.d4_b_x_mas)
+  value = local.days[4] ? length(local.d4_b_x_mas) : null
 }
