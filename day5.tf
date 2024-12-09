@@ -1,8 +1,8 @@
 locals {
   d5_input = module.d5_parse_input.first
-  d5_rules_raw = [
+  d5_rules_raw = local.days[5] ? [
     for line in split("\n", local.d5_input[0]) : split("|", line)
-  ]
+  ] : []
   d5_rules_after_vals = toset([
     for rule in local.d5_rules_raw : rule[1]
   ])
@@ -12,9 +12,9 @@ locals {
     ])
   }
 
-  d5_orders = [
+  d5_orders = local.days[5] ? [
     for line in split("\n", local.d5_input[1]) : split(",", line)
-  ]
+  ] : []
 
   d5_valid = [
     for order in local.d5_orders : tonumber(order[floor(length(order) / 2)]) if length([
@@ -45,9 +45,9 @@ module "d5_parse_input" {
 
 
 output "day5-a" {
-  value = sum(local.d5_valid)
+  value = local.days[5] ? sum(local.d5_valid) : null
 }
 
 output "day5-b" {
-  value = sum(local.d5_b_sorted)
+  value = local.days[5] ? sum(local.d5_b_sorted) : null
 }
